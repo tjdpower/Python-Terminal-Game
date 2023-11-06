@@ -1,2 +1,5 @@
-# Python-Terminal-Game
-Portfolio project 1 from computer science career path on codecademy.com
+# Python Terminal Game (Portfolio Project)
+
+This is the first portfolio proect from the *Computer Science* career path on **Codecademy.com**
+
+This is a terminal version of the game of checkers.
