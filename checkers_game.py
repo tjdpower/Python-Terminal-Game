@@ -17,10 +17,10 @@ print("""
 print("Welcome to a classic two-player game of checkers.")
 
 #get input for player names
-red_player = input("Who will play the red pieces?: ")
-black_player = input("Who will play the black pieces?: ")
+# red_player = input("Who will play the red pieces?: ")
+# black_player = input("Who will play the black pieces?: ")
 
-print("Thank you " + red_player + " and " + black_player + ", let's begin!")
+#print("Thank you " + red_player + " and " + black_player + ", let's begin!")
 
 #initialize pieces
 B1 = Checkers_Piece("Black1", "black", (1,1))
@@ -48,5 +48,21 @@ R10 = Checkers_Piece("Red10", "red", (6,6))
 R11 = Checkers_Piece("Red11", "red", (6,4))
 R12 = Checkers_Piece("Red12", "red", (6,2))
 
-board_border = ["+-----"*8 + "+"]
-print(board_border)
+#Building game board
+vertical_border = str("+-----" * 8) + "+"
+
+odd_rows = str("|# # #|     " * 4) + "|"
+even_rows = str("|     |# # #" * 4) + "|"
+
+board.append(vertical_border)
+for i in range(8):
+      for j in range(3):
+            if i%2 == 0:
+                  board.append(odd_rows)
+            else:
+                  board.append(even_rows)
+      board.append(vertical_border)
+
+for k in range(len(board)):
+      print(board[k])
+
