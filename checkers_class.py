@@ -13,11 +13,11 @@ class Checkers_Piece:
         self.king = king
 
         if self.colour == "red":
-            red_piece_count += 1
-            red_piece_list.append(self.name)
+            Checkers_Piece.red_piece_count += 1
+            Checkers_Piece.red_piece_list.append(self.name)
         else:
-            black_piece_count += 1
-            black_piece_list.append(self.name)
+            Checkers_Piece.black_piece_count += 1
+            Checkers_Piece.black_piece_list.append(self.name)
     
     def move_piece(self, new_location):
         self.location = new_location
@@ -25,9 +25,9 @@ class Checkers_Piece:
     def jump_enemy(self, enemy_piece, end_location):
         move_piece(end_location)
         if enemy_piece.colour == "red":
-            red_piece_count -= 1
-            red_piece_list.remove(self.name)
+            Checkers_Piece.red_piece_count -= 1
+            Checkers_Piece.red_piece_list.remove(self.name)
         else:
-            black_piece_count -= 1
-            black_piece_list.remove(self.name)
+            Checkers_Piece.black_piece_count -= 1
+            Checkers_Piece.black_piece_list.remove(self.name)
 
