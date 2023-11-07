@@ -63,6 +63,27 @@ for i in range(8):
                   board.append(even_rows)
       board.append(vertical_border)
 
+#placing red pieces on board
+for b in range(len(Checkers_Piece.red_piece_location_list)):
+      temp_string = ""
+      location = Checkers_Piece.red_piece_location_list[b]
+      if location = NULL:
+            temp_string = board[(location[0]*2 - 1) * 2]     
+      elif b < 9:
+            temp_string = board[(location[0]*2 - 1) * 2][:((location[1]*2 - 1) * 3)-2] + " R" + str(b+1) + "  " + board[(location[0]*2 - 1) * 2][((location[1]*2 - 1) * 3)+3:]
+      else:
+            temp_string = board[(location[0]*2 - 1) * 2][:((location[1]*2 - 1) * 3)-2] + " R" + str(b+1) + " " + board[(location[0]*2 - 1) * 2][((location[1]*2 - 1) * 3)+3:]      
+      board[(location[0]*2 - 1) * 2] = temp_string
+
+#Placing black pieces on board
+for b in range(len(Checkers_Piece.black_piece_location_list)):
+      temp_string = ""
+      location = Checkers_Piece.black_piece_location_list[b]
+      if b < 9:
+            temp_string = board[(location[0]*2 - 1) * 2][:((location[1]*2 - 1) * 3)-2] + " B" + str(b+1) + "  " + board[(location[0]*2 - 1) * 2][((location[1]*2 - 1) * 3)+3:]
+      else:
+            temp_string = board[(location[0]*2 - 1) * 2][:((location[1]*2 - 1) * 3)-2] + " B" + str(b+1) + " " + board[(location[0]*2 - 1) * 2][((location[1]*2 - 1) * 3)+3:]      
+      board[(location[0]*2 - 1) * 2] = temp_string
+
 for k in range(len(board)):
       print(board[k])
-
