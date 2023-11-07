@@ -33,8 +33,8 @@ class Checkers_Piece:
         self.move_piece(end_location)
         if enemy_piece.colour == "red":
             Checkers_Piece.red_piece_count -= 1
-            Checkers_Piece.red_piece_location_list[self.list_position] = "null"
+            Checkers_Piece.red_piece_location_list[enemy_piece.list_position] = "null"
         else:
             Checkers_Piece.black_piece_count -= 1
-            Checkers_Piece.black_piece_location_list[self.list_position] = "null"
+            Checkers_Piece.black_piece_location_list[enemy_piece.list_position] = "null"
 
