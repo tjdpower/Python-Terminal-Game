@@ -34,8 +34,8 @@ class Checkers_Piece:
         self.move_piece(end_location)
         if enemy_piece.colour == "red":
             Checkers_Piece.red_piece_count -= 1
-            Checkers_Piece.red_piece_list.remove(self.name)
+            Checkers_Piece.red_piece_location_list.remove(self.location)
         else:
             Checkers_Piece.black_piece_count -= 1
-            Checkers_Piece.black_piece_list.remove(self.name)
+            Checkers_Piece.black_piece_location_list.remove(self.location)
 
