@@ -105,7 +105,7 @@ place_black()
 for f in range(len(board)):
       print(board[f])
 
-def update_board(piece_moved, old_location, new_location, pieces_to_jump_location = []):
+def update_board(piece_moved, old_location, new_location, is_king, pieces_to_jump_location = []):
       temp_string_old = ""
       temp_string_new = ""
       temp_string_jump = ""
@@ -118,8 +118,12 @@ def update_board(piece_moved, old_location, new_location, pieces_to_jump_locatio
                   
                   temp_string_jump = board[jump_location[0]*3 + jump_location[0] - 1][:((jump_location[1]*2 - 1) * 3)-1] + "# # #" + board[jump_location[0]*3 + jump_location[0] - 1][((jump_location[1]*2 - 1) * 3)+4:]
                   board[jump_location[0]*3 + jump_location[0] - 1] = temp_string_jump
-                  
-      if piece_number <= 9:
+      if is_king:
+            if piece_number <= 9:
+                  temp_string_new = board[new_location[0]*3 + new_location[0] - 1][:((new_location[1]*2 - 1) * 3)-1] + " k" + piece_moved[0].upper() + str(piece_number) + " " + board[new_location[0]*3 + new_location[0] - 1][((new_location[1]*2 - 1) * 3)+4:]
+            else:
+                  temp_string_new = board[new_location[0]*3 + new_location[0] - 1][:((new_location[1]*2 - 1) * 3)-1] + " k" + piece_moved[0].upper() + str(piece_number) + board[new_location[0]*3 + new_location[0] - 1][((new_location[1]*2 - 1) * 3)+4:]      
+      elif piece_number <= 9:
             temp_string_new = board[new_location[0]*3 + new_location[0] - 1][:((new_location[1]*2 - 1) * 3)-1] + " " + piece_moved[0].upper() + str(piece_number) + "  " + board[new_location[0]*3 + new_location[0] - 1][((new_location[1]*2 - 1) * 3)+4:]
       else:
             temp_string_new = board[new_location[0]*3 + new_location[0] - 1][:((new_location[1]*2 - 1) * 3)-1] + " " + piece_moved[0].upper() + str(piece_number) + " " + board[new_location[0]*3 + new_location[0] - 1][((new_location[1]*2 - 1) * 3)+4:]      
@@ -146,7 +150,7 @@ while (Checkers_Piece.black_piece_count != 0 and Checkers_Piece.red_piece_count 
                   multi_jump = input("Are you jumping more than one piece? (y/n):  ")
                   if multi_jump == "y":
                         jump_count = input("How many jumps are you making?:  ")
-                        for i in range(jump_count):
+                        for i in range(int(jump_count)):
                               pieces_to_jump.append(input("Name a piece you are jumping (R1, R2, ...):  "))
                   else:
                         pieces_to_jump.append(input("Name the piece you are jumping (R1, R2, ...):  "))
@@ -194,7 +198,7 @@ while (Checkers_Piece.black_piece_count != 0 and Checkers_Piece.red_piece_count 
                   #Black pieces where king = False can only move "down" on the board and cannot be where there is already a piece, check if move is valid
                   if (where_to_move in Checkers_Piece.black_piece_location_list or where_to_move in Checkers_Piece.red_piece_location_list or (movement_direction == "up" and not king_status)):
                         print("Sorry, that is not a valid move. Please try again.")
-                  elif movement_direction == "down" and is_jump == "y":
+                  elif movement_direction == ("down" or (movement_direction == "up" and king_status)) and is_jump == "y":
                         pieces_to_jump_location = []
                         for piece in pieces_to_jump:                    #need to find a way to simplify all these if statements
                               if piece_to_move == "B1":
@@ -641,7 +645,7 @@ while (Checkers_Piece.black_piece_count != 0 and Checkers_Piece.red_piece_count 
                                     else:
                                           pieces_to_jump_location.append(R12.location)
                                           B12.jump_enemy(R12, where_to_move)
-                  elif movement_direction == "down":
+                  elif movement_direction == "down" or (movement_direction == "up" and king_status):
                         if piece_to_move == "B1":
                               B1.move_piece(where_to_move)
                         elif piece_to_move == "B2":
@@ -669,11 +673,45 @@ while (Checkers_Piece.black_piece_count != 0 and Checkers_Piece.red_piece_count 
                   else:
                         print("Something went wrong. Please try again.")
                   
-                  if is_jump == "y":
-                        update_board(piece_to_move, current_location, where_to_move, pieces_to_jump_location)
+                  if where_to_move[0] == 8:
+                        print("Congratulations! You have gotten your piece to the far side of the board. It is now a king and can move in any direction.")
+                        if piece_to_move == "B1":
+                              B1.king = True
+                        elif piece_to_move == "B2":
+                              B2.king = True
+                        elif piece_to_move == "B3":
+                              B3.king = True
+                        elif piece_to_move == "B4":
+                              B4.king = True
+                        elif piece_to_move == "B5":
+                              B5.king = True
+                        elif piece_to_move == "B6":
+                              B6.king = True
+                        elif piece_to_move == "B7":
+                              B7.king = True
+                        elif piece_to_move == "B8":
+                              B8.king = True
+                        elif piece_to_move == "B9":
+                              B9.king = True
+                        elif piece_to_move == "B10":
+                              B10.king = True
+                        elif piece_to_move == "B11":
+                              B11.king = True
+                        else:
+                              B12.king = True
+                        is_king = True
+                  elif king_status:
+                        is_king = True
                   else:
-                        update_board(piece_to_move, current_location, where_to_move)
+                        is_king = False
+
+
+                  if is_jump == "y":
+                        update_board(piece_to_move, current_location, where_to_move, is_king, pieces_to_jump_location)
+                  else:
+                        update_board(piece_to_move, current_location, where_to_move, is_king)
                   turn_count += 1
+
       #Red player's turn      
       else:
             piece_to_move = input(red_player + ", which piece would you like to move? (R1, R2,...):  ")
@@ -731,7 +769,7 @@ while (Checkers_Piece.black_piece_count != 0 and Checkers_Piece.red_piece_count 
                   #Red pieces where king = False can only move "up" on the board and cannot be where there is already a piece, check if move is valid
                   if (where_to_move in Checkers_Piece.black_piece_location_list or where_to_move in Checkers_Piece.red_piece_location_list or (movement_direction == "down" and not king_status)):
                         print("Sorry, that is not a valid move. Please try again.")
-                  elif movement_direction == "up" and is_jump == "y":
+                  elif (movement_direction == "up" or (movement_direction == "down" and king_status)) and is_jump == "y":
                         pieces_to_jump_location = []
                         for piece in pieces_to_jump:                    #need to find a way to simplify all these if statements
                               if piece_to_move == "R1":
@@ -1178,7 +1216,7 @@ while (Checkers_Piece.black_piece_count != 0 and Checkers_Piece.red_piece_count 
                                     else:
                                           pieces_to_jump_location.append(B12.location)
                                           R12.jump_enemy(B12, where_to_move)
-                  elif movement_direction == "up":
+                  elif movement_direction == "up"or (movement_direction == "down" and king_status):
                         if piece_to_move == "R1":
                               R1.move_piece(where_to_move)
                         elif piece_to_move == "R2":
@@ -1206,9 +1244,41 @@ while (Checkers_Piece.black_piece_count != 0 and Checkers_Piece.red_piece_count 
                   else:
                         print("Something went wrong. Please try again.")
                   
-                  if is_jump == "y":
-                        update_board(piece_to_move, current_location, where_to_move, pieces_to_jump_location)
+                  if where_to_move[0] == 1:
+                        print("Congratulations! You have gotten your piece to the far side of the board. It is now a king and can move in any direction.")
+                        if piece_to_move == "R1":
+                              R1.king = True
+                        elif piece_to_move == "R2":
+                              R2.king = True
+                        elif piece_to_move == "R3":
+                              R3.king = True
+                        elif piece_to_move == "R4":
+                              R4.king = True
+                        elif piece_to_move == "R5":
+                              R5.king = True
+                        elif piece_to_move == "R6":
+                              R6.king = True
+                        elif piece_to_move == "R7":
+                              R7.king = True
+                        elif piece_to_move == "R8":
+                              R8.king = True
+                        elif piece_to_move == "R9":
+                              R9.king = True
+                        elif piece_to_move == "R10":
+                              R10.king = True
+                        elif piece_to_move == "R11":
+                              R11.king = True
+                        else:
+                              R12.king = True
+                        is_king = True
+                  elif king_status:
+                        is_king = True
                   else:
-                        update_board(piece_to_move, current_location, where_to_move)
+                        is_king = False
+                  
+                  if is_jump == "y":
+                        update_board(piece_to_move, current_location, where_to_move, is_king, pieces_to_jump_location)
+                  else:
+                        update_board(piece_to_move, current_location, where_to_move, is_king)
                   turn_count += 1
                   
