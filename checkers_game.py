@@ -146,6 +146,10 @@ while (Checkers_Piece.black_piece_count != 0 and Checkers_Piece.red_piece_count 
       if turn_count % 2 == 0:
             try:
                   piece_to_move = input(black_player + ", which piece would you like to move? (B1, B2,...):  ")
+
+                  if piece_to_move == "quit":
+                        break
+                  
                   where_to_move = ast.literal_eval(input("Where would you like to move to? eg.(4,5):  "))
                   is_jump = input("Are you jumping an opponent's piece? (y/n):  ")
                   if is_jump == "y":
@@ -159,8 +163,6 @@ while (Checkers_Piece.black_piece_count != 0 and Checkers_Piece.red_piece_count 
             except:
                   print("It looks like something was entered incorrectly. Try again!")
             else:
-                  if piece_to_move == "quit":
-                        break
                   
                   piece_number = int(piece_to_move[1:])
                   current_location = Checkers_Piece.black_piece_location_list[piece_number-1]
@@ -722,6 +724,10 @@ while (Checkers_Piece.black_piece_count != 0 and Checkers_Piece.red_piece_count 
       else:
             try:
                   piece_to_move = input(red_player + ", which piece would you like to move? (R1, R2,...):  ")
+                  
+                  if piece_to_move == "quit":
+                        break
+                  
                   where_to_move = ast.literal_eval(input("Where would you like to move to? eg.(4,5):  "))
                   is_jump = input("Are you jumping an opponent's piece? (y/n):  ")
                   if is_jump == "y":
@@ -735,9 +741,7 @@ while (Checkers_Piece.black_piece_count != 0 and Checkers_Piece.red_piece_count 
             except:
                   print("It looks like something was entered incorrectly. Try again!")
             else:
-                  if piece_to_move == "quit":
-                        break
-
+                  
                   piece_number = int(piece_to_move[1:])            
                   current_location = Checkers_Piece.red_piece_location_list[piece_number-1]
                   
