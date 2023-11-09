@@ -18,10 +18,10 @@ print("Welcome to a classic two-player game of checkers.")
 print("To quit at any time, type \"quit\" at the start of your turn")
 
 #get input for player names
-red_player = input("Who will play the red pieces?: ")
+white_player = input("Who will play the white pieces?: ")
 black_player = input("Who will play the black pieces?: ")
 
-print("Thank you " + red_player + " and " + black_player + ", let's begin!")
+print("Thank you " + white_player + " and " + black_player + ", let's begin!")
 
 #initialize pieces
 B1 = Checkers_Piece("Black1", "black", (1,1)) #can this process be done with a loop?
@@ -36,18 +36,18 @@ B9 = Checkers_Piece("Black9", "black", (3,1))
 B10 = Checkers_Piece("Black10", "black", (3,3))
 B11 = Checkers_Piece("Black11", "black", (3,5))
 B12 = Checkers_Piece("Black12", "black", (3,7))
-R1 = Checkers_Piece("Red1", "red", (8,8))
-R2 = Checkers_Piece("Red2", "red", (8,6))
-R3 = Checkers_Piece("Red3", "red", (8,4))
-R4 = Checkers_Piece("Red4", "red", (8,2))
-R5 = Checkers_Piece("Red5", "red", (7,7))
-R6 = Checkers_Piece("Red6", "red", (7,5))
-R7 = Checkers_Piece("Red7", "red", (7,3))
-R8 = Checkers_Piece("Red8", "red", (7,1))
-R9 = Checkers_Piece("Red9", "red", (6,8))
-R10 = Checkers_Piece("Red10", "red", (6,6))
-R11 = Checkers_Piece("Red11", "red", (6,4))
-R12 = Checkers_Piece("Red12", "red", (6,2))
+W1 = Checkers_Piece("white1", "white", (8,8))
+W2 = Checkers_Piece("white2", "white", (8,6))
+W3 = Checkers_Piece("white3", "white", (8,4))
+W4 = Checkers_Piece("white", "white", (8,2))
+W5 = Checkers_Piece("white5", "white", (7,7))
+W6 = Checkers_Piece("white6", "white", (7,5))
+W7 = Checkers_Piece("white7", "white", (7,3))
+W8 = Checkers_Piece("white8", "white", (7,1))
+W9 = Checkers_Piece("white9", "white", (6,8))
+W10 = Checkers_Piece("white10", "white", (6,6))
+W11 = Checkers_Piece("white11", "white", (6,4))
+W12 = Checkers_Piece("white12", "white", (6,2))
 
 #Building game board
 header_string = "    "
@@ -72,35 +72,27 @@ for b in range(8):
             board.append(" " + even_rows)
       board.append(vertical_border)
 
-#placing red pieces on board
-def place_red():
-      for d in range(len(Checkers_Piece.red_piece_location_list)):
-            temp_string = ""
-            location = Checkers_Piece.red_piece_location_list[d]
-            if location == "null":
-                  temp_string = board[location[0]*3 + location[0] - 1]     
-            elif d < 9:
-                  temp_string = board[location[0]*3 + location[0] - 1][:((location[1]*2 - 1) * 3)-1] + " R" + str(d+1) + "  " + board[location[0]*3 + location[0] - 1][((location[1]*2 - 1) * 3)+4:]
-            else:
-                  temp_string = board[location[0]*3 + location[0] - 1][:((location[1]*2 - 1) * 3)-1] + " R" + str(d+1) + " " + board[location[0]*3 + location[0] - 1][((location[1]*2 - 1) * 3)+4:]      
-            board[location[0]*3 + location[0] - 1] = temp_string
+#placing white pieces on board
 
-place_red()
+for d in range(len(Checkers_Piece.white_piece_location_list)):
+      temp_string = ""
+      location = Checkers_Piece.white_piece_location_list[d]
+      if d < 9:
+            temp_string = board[location[0]*3 + location[0] - 1][:((location[1]*2 - 1) * 3)-1] + " W" + str(d+1) + "  " + board[location[0]*3 + location[0] - 1][((location[1]*2 - 1) * 3)+4:]
+      else:
+            temp_string = board[location[0]*3 + location[0] - 1][:((location[1]*2 - 1) * 3)-1] + " W" + str(d+1) + " " + board[location[0]*3 + location[0] - 1][((location[1]*2 - 1) * 3)+4:]
+      board[location[0]*3 + location[0] - 1] = temp_string
 
 #Placing black pieces on board
-def place_black():
-      for e in range(len(Checkers_Piece.black_piece_location_list)):
-            temp_string = ""
-            location = Checkers_Piece.black_piece_location_list[e]
-            if location == "null":
-                  temp_string = board[location[0]*3 + location[0] - 1]     
-            elif e < 9:
-                  temp_string = board[location[0]*3 + location[0] - 1][:((location[1]*2 - 1) * 3)-1] + " B" + str(e+1) + "  " + board[location[0]*3 + location[0] - 1][((location[1]*2 - 1) * 3)+4:]
-            else:
-                  temp_string = board[location[0]*3 + location[0] - 1][:((location[1]*2 - 1) * 3)-1] + " B" + str(e+1) + " " + board[location[0]*3 + location[0] - 1][((location[1]*2 - 1) * 3)+4:]      
-            board[location[0]*3 + location[0] - 1] = temp_string
 
-place_black()
+for e in range(len(Checkers_Piece.black_piece_location_list)):
+      temp_string = ""
+      location = Checkers_Piece.black_piece_location_list[e]
+      if e < 9:
+            temp_string = board[location[0]*3 + location[0] - 1][:((location[1]*2 - 1) * 3)-1] + " B" + str(e+1) + "  " + board[location[0]*3 + location[0] - 1][((location[1]*2 - 1) * 3)+4:]
+      else:
+            temp_string = board[location[0]*3 + location[0] - 1][:((location[1]*2 - 1) * 3)-1] + " B" + str(e+1) + " " + board[location[0]*3 + location[0] - 1][((location[1]*2 - 1) * 3)+4:]
+      board[location[0]*3 + location[0] - 1] = temp_string
 
 #printing starting board
 for f in range(len(board)):
@@ -163,30 +155,30 @@ def identify_piece(piece_to_identify):
             return B11
       elif piece_to_identify == "B12":
             return B12
-      elif piece_to_identify == "R1":
-            return R1
-      elif piece_to_identify == "R2":
-            return R2
-      elif piece_to_identify == "R3":
-            return R3
-      elif piece_to_identify =="R4":
-            return R4
-      elif piece_to_identify == "R5":
-            return R5
-      elif piece_to_identify == "R6":
-            return R6
-      elif piece_to_identify == "R7":
-            return R7
-      elif piece_to_identify == "R8":
-            return R8
-      elif piece_to_identify == "R9":
-            return R9
-      elif piece_to_identify == "R10":
-            return R10
-      elif piece_to_identify == "R11":
-            return R11
+      elif piece_to_identify == "W1":
+            return W1
+      elif piece_to_identify == "W2":
+            return W2
+      elif piece_to_identify == "W3":
+            return W3
+      elif piece_to_identify =="W4":
+            return W4
+      elif piece_to_identify == "W5":
+            return W5
+      elif piece_to_identify == "W6":
+            return W6
+      elif piece_to_identify == "W7":
+            return W7
+      elif piece_to_identify == "W8":
+            return W8
+      elif piece_to_identify == "W9":
+            return W9
+      elif piece_to_identify == "W10":
+            return W10
+      elif piece_to_identify == "W11":
+            return W11
       else:
-            return R12
+            return W12
 
 #begin playing the game
 print("The black pieces get to start, so " + black_player + " will go first.")
@@ -194,7 +186,8 @@ print("The black pieces get to start, so " + black_player + " will go first.")
 turn_count = 0
 
 #loop until one player has no pieces left
-while (Checkers_Piece.black_piece_count != 0 and Checkers_Piece.red_piece_count != 0):
+while (Checkers_Piece.black_piece_count != 0 and Checkers_Piece.white_piece_count != 0):
+
       pieces_to_jump = []
       if turn_count % 2 == 0:
             try:
@@ -203,16 +196,16 @@ while (Checkers_Piece.black_piece_count != 0 and Checkers_Piece.red_piece_count 
                   if piece_to_move == "quit":
                         break
                   
-                  where_to_move = ast.literal_eval(input("Where would you like to move to? eg.(4,5):  "))
+                  where_to_move = ast.literal_eval(input("Where would you like to move to? Please enter as (row#,Col#) eg.(4,5):  "))
                   is_jump = input("Are you jumping an opponent's piece? (y/n):  ")
                   if is_jump == "y":
                         multi_jump = input("Are you jumping more than one piece? (y/n):  ")
                         if multi_jump == "y":
                               jump_count = input("How many jumps are you making?:  ")
                               for i in range(int(jump_count)):
-                                    pieces_to_jump.append(input("Name a piece you are jumping (R1, R2, ...):  "))
+                                    pieces_to_jump.append(input("Name a piece you are jumping (W1, W2, ...):  "))
                         else:
-                              pieces_to_jump.append(input("Name the piece you are jumping (R1, R2, ...):  "))
+                              pieces_to_jump.append(input("Name the piece you are jumping (W1, W2, ...):  "))
             except:
                   print("It looks like something was entered incorrectly. Try again!")
             else:
@@ -234,7 +227,7 @@ while (Checkers_Piece.black_piece_count != 0 and Checkers_Piece.red_piece_count 
                               movement_direction = "up"
 
                         #Black pieces where king = False can only move "down" on the board and cannot be where there is already a piece, check if move is valid
-                        if (where_to_move in Checkers_Piece.black_piece_location_list or where_to_move in Checkers_Piece.red_piece_location_list or (movement_direction == "up" and not king_status)):
+                        if (where_to_move in Checkers_Piece.black_piece_location_list or where_to_move in Checkers_Piece.white_piece_location_list or (movement_direction == "up" and not king_status)):
                               print("Sorry, that is not a valid move. Please try again.")
 
                         elif movement_direction == ("down" or (movement_direction == "up" and king_status)) and is_jump == "y":
@@ -267,15 +260,15 @@ while (Checkers_Piece.black_piece_count != 0 and Checkers_Piece.red_piece_count 
                               update_board(piece_to_move, current_location, where_to_move, is_king)
                         turn_count += 1
 
-      #Red player's turn      
+      #white player's turn      
       else:
             try:
-                  piece_to_move = input(red_player + ", which piece would you like to move? (R1, R2,...):  ")
+                  piece_to_move = input(white_player + ", which piece would you like to move? (W1, W2,...):  ")
                   
                   if piece_to_move == "quit":
                         break
                   
-                  where_to_move = ast.literal_eval(input("Where would you like to move to? eg.(4,5):  "))
+                  where_to_move = ast.literal_eval(input("Where would you like to move to? Please enter as (row#,Col#) eg.(4,5):  "))
                   is_jump = input("Are you jumping an opponent's piece? (y/n):  ")
                   if is_jump == "y":
                         multi_jump = input("Are you jumping more than one piece? (y/n):  ")
@@ -290,7 +283,7 @@ while (Checkers_Piece.black_piece_count != 0 and Checkers_Piece.red_piece_count 
             else:
                   
                   piece_number = int(piece_to_move[1:])            
-                  current_location = Checkers_Piece.red_piece_location_list[piece_number-1]
+                  current_location = Checkers_Piece.white_piece_location_list[piece_number-1]
                   piece_object = identify_piece(piece_to_move)
                   
                   #need to identify which checker piece is being moved
@@ -306,8 +299,8 @@ while (Checkers_Piece.black_piece_count != 0 and Checkers_Piece.red_piece_count 
                         else:
                               movement_direction = "up"
 
-                        #Red pieces where king = False can only move "up" on the board and cannot be where there is already a piece, check if move is valid
-                        if (where_to_move in Checkers_Piece.black_piece_location_list or where_to_move in Checkers_Piece.red_piece_location_list or (movement_direction == "down" and not king_status)):
+                        #white pieces where king = False can only move "up" on the board and cannot be where there is already a piece, check if move is valid
+                        if (where_to_move in Checkers_Piece.black_piece_location_list or where_to_move in Checkers_Piece.white_piece_location_list or (movement_direction == "down" and not king_status)):
                               print("Sorry, that is not a valid move. Please try again.")
 
                         elif (movement_direction == "up" or (movement_direction == "down" and king_status)) and is_jump == "y":
@@ -341,8 +334,8 @@ while (Checkers_Piece.black_piece_count != 0 and Checkers_Piece.red_piece_count 
                         turn_count += 1
                   
 if Checkers_Piece.black_piece_count == 0:
-      print("Congratulations " + red_player + "! You won!")
-elif Checkers_Piece.red_piece_count == 0:
+      print("Congratulations " + white_player + "! You won!")
+elif Checkers_Piece.white_piece_count == 0:
       print("Congratulations " + black_player + "! You won!")
 else:
       print("Sorry to see you go!")
