@@ -136,6 +136,56 @@ def update_board(piece_moved, old_location, new_location, is_king, pieces_to_jum
       for g in range(len(board)):
             print(board[g])
 
+#determine which variable is described by the user's response
+def identify_piece(piece_to_identify):
+      if piece_to_identify == "B1":
+            return B1
+      elif piece_to_identify == "B2":
+            return B2
+      elif piece_to_identify == "B3":
+            return B3
+      elif piece_to_identify =="B4":
+            return B4
+      elif piece_to_identify == "B5":
+            return B5
+      elif piece_to_identify == "B6":
+            return B6
+      elif piece_to_identify == "B7":
+            return B7
+      elif piece_to_identify == "B8":
+            return B8
+      elif piece_to_identify == "B9":
+            return B9
+      elif piece_to_identify == "B10":
+            return B10
+      elif piece_to_identify == "B11":
+            return B11
+      elif piece_to_identify == "B12":
+            return B12
+      elif piece_to_identify == "R1":
+            return R1
+      elif piece_to_identify == "R2":
+            return R2
+      elif piece_to_identify == "R3":
+            return R3
+      elif piece_to_identify =="R4":
+            return R4
+      elif piece_to_identify == "R5":
+            return R5
+      elif piece_to_identify == "R6":
+            return R6
+      elif piece_to_identify == "R7":
+            return R7
+      elif piece_to_identify == "R8":
+            return R8
+      elif piece_to_identify == "R9":
+            return R9
+      elif piece_to_identify == "R10":
+            return R10
+      elif piece_to_identify == "R11":
+            return R11
+      else:
+            return R12
 #begin playing the game
 print("The black pieces get to start, so " + black_player + " will go first.")
 
@@ -166,33 +216,10 @@ while (Checkers_Piece.black_piece_count != 0 and Checkers_Piece.red_piece_count 
                   
                   piece_number = int(piece_to_move[1:])
                   current_location = Checkers_Piece.black_piece_location_list[piece_number-1]
-                  
-                  
-                  #need to identify status of checker piece being moved
-                  if piece_to_move == "B1":
-                        king_status = B1.king
-                  elif piece_to_move == "B2":
-                        king_status = B2.king
-                  elif piece_to_move == "B3":
-                        king_status = B3.king
-                  elif piece_to_move =="B4":
-                        king_status = B4.king
-                  elif piece_to_move == "B5":
-                        king_status = B5.king
-                  elif piece_to_move == "B6":
-                        king_status = B6.king
-                  elif piece_to_move == "B7":
-                        king_status = B7.king
-                  elif piece_to_move == "B8":
-                        king_status = B8.king
-                  elif piece_to_move == "B9":
-                        king_status = B9.king
-                  elif piece_to_move == "B10":
-                        king_status = B10.king
-                  elif piece_to_move == "B11":
-                        king_status = B11.king
-                  else:
-                        king_status = B12.king
+                  piece_object = identify_piece(piece_to_move)
+                                    
+                  #need to identify if checker piece being moved is a king
+                  king_status = piece_object.king
                   
                   #movement direction
                   if abs(int(where_to_move[1]) - int(current_location[1])) != 1 and is_jump == "n":
@@ -206,514 +233,31 @@ while (Checkers_Piece.black_piece_count != 0 and Checkers_Piece.red_piece_count 
                         #Black pieces where king = False can only move "down" on the board and cannot be where there is already a piece, check if move is valid
                         if (where_to_move in Checkers_Piece.black_piece_location_list or where_to_move in Checkers_Piece.red_piece_location_list or (movement_direction == "up" and not king_status)):
                               print("Sorry, that is not a valid move. Please try again.")
+
                         elif movement_direction == ("down" or (movement_direction == "up" and king_status)) and is_jump == "y":
                               pieces_to_jump_location = []
-                              for piece in pieces_to_jump:                    #need to find a way to simplify all these if statements
-                                    if piece_to_move == "B1":
-                                          if piece == "R1":
-                                                pieces_to_jump_location.append(R1.location)
-                                                B1.jump_enemy(R1, where_to_move)
-                                          elif piece == "R2":
-                                                pieces_to_jump_location.append(R2.location)
-                                                B1.jump_enemy(R2, where_to_move)
-                                          elif piece == "R3":
-                                                pieces_to_jump_location.append(R3.location)
-                                                B1.jump_enemy(R3, where_to_move)
-                                          elif piece == "R4":
-                                                pieces_to_jump_location.append(R4.location)
-                                                B1.jump_enemy(R4, where_to_move)
-                                          elif piece == "R5":
-                                                pieces_to_jump_location.append(R5.location)
-                                                B1.jump_enemy(R5, where_to_move)
-                                          elif piece == "R6":
-                                                pieces_to_jump_location.append(R6.location)
-                                                B1.jump_enemy(R6, where_to_move)
-                                          elif piece == "R7":
-                                                pieces_to_jump_location.append(R7.location)
-                                                B1.jump_enemy(R7, where_to_move)
-                                          elif piece == "R8":
-                                                pieces_to_jump_location.append(R8.location)
-                                                B1.jump_enemy(R8, where_to_move)
-                                          elif piece == "R9":
-                                                pieces_to_jump_location.append(R9.location)
-                                                B1.jump_enemy(R9, where_to_move)
-                                          elif piece == "R10":
-                                                pieces_to_jump_location.append(R10.location)
-                                                B1.jump_enemy(R10, where_to_move)
-                                          elif piece == "R11":
-                                                pieces_to_jump_location.append(R11.location)
-                                                B1.jump_enemy(R11, where_to_move)
-                                          else:
-                                                pieces_to_jump_location.append(R12.location)
-                                                B1.jump_enemy(R12, where_to_move)
-                                    elif piece_to_move == "B2":
-                                          if piece == "R1":
-                                                pieces_to_jump_location.append(R1.location)
-                                                B2.jump_enemy(R1, where_to_move)
-                                          elif piece == "R2":
-                                                pieces_to_jump_location.append(R2.location)
-                                                B2.jump_enemy(R2, where_to_move)
-                                          elif piece == "R3":
-                                                pieces_to_jump_location.append(R3.location)
-                                                B2.jump_enemy(R3, where_to_move)
-                                          elif piece == "R4":
-                                                pieces_to_jump_location.append(R4.location)
-                                                B2.jump_enemy(R4, where_to_move)
-                                          elif piece == "R5":
-                                                pieces_to_jump_location.append(R5.location)
-                                                B2.jump_enemy(R5, where_to_move)
-                                          elif piece == "R6":
-                                                pieces_to_jump_location.append(R6.location)
-                                                B2.jump_enemy(R6, where_to_move)
-                                          elif piece == "R7":
-                                                pieces_to_jump_location.append(R7.location)
-                                                B2.jump_enemy(R7, where_to_move)
-                                          elif piece == "R8":
-                                                pieces_to_jump_location.append(R8.location)
-                                                B2.jump_enemy(R8, where_to_move)
-                                          elif piece == "R9":
-                                                pieces_to_jump_location.append(R9.location)
-                                                B2.jump_enemy(R9, where_to_move)
-                                          elif piece == "R10":
-                                                pieces_to_jump_location.append(R10.location)
-                                                B2.jump_enemy(R10, where_to_move)
-                                          elif piece == "R11":
-                                                pieces_to_jump_location.append(R11.location)
-                                                B2.jump_enemy(R11, where_to_move)
-                                          else:
-                                                pieces_to_jump_location.append(R12.location)
-                                                B2.jump_enemy(R12, where_to_move)
-                                    elif piece_to_move == "B3":
-                                          if piece == "R1":
-                                                pieces_to_jump_location.append(R1.location)
-                                                B3.jump_enemy(R1, where_to_move)
-                                          elif piece == "R2":
-                                                pieces_to_jump_location.append(R2.location)
-                                                B3.jump_enemy(R2, where_to_move)
-                                          elif piece == "R3":
-                                                pieces_to_jump_location.append(R3.location)
-                                                B3.jump_enemy(R3, where_to_move)
-                                          elif piece == "R4":
-                                                pieces_to_jump_location.append(R4.location)
-                                                B3.jump_enemy(R4, where_to_move)
-                                          elif piece == "R5":
-                                                pieces_to_jump_location.append(R5.location)
-                                                B3.jump_enemy(R5, where_to_move)
-                                          elif piece == "R6":
-                                                pieces_to_jump_location.append(R6.location)
-                                                B3.jump_enemy(R6, where_to_move)
-                                          elif piece == "R7":
-                                                pieces_to_jump_location.append(R7.location)
-                                                B3.jump_enemy(R7, where_to_move)
-                                          elif piece == "R8":
-                                                pieces_to_jump_location.append(R8.location)
-                                                B3.jump_enemy(R8, where_to_move)
-                                          elif piece == "R9":
-                                                pieces_to_jump_location.append(R9.location)
-                                                B3.jump_enemy(R9, where_to_move)
-                                          elif piece == "R10":
-                                                pieces_to_jump_location.append(R10.location)
-                                                B3.jump_enemy(R10, where_to_move)
-                                          elif piece == "R11":
-                                                pieces_to_jump_location.append(R11.location)
-                                                B3.jump_enemy(R11, where_to_move)
-                                          else:
-                                                pieces_to_jump_location.append(R12.location)
-                                                B3.jump_enemy(R12, where_to_move)
-                                    elif piece_to_move == "B4":
-                                          if piece == "R1":
-                                                pieces_to_jump_location.append(R1.location)
-                                                B4.jump_enemy(R1, where_to_move)
-                                          elif piece == "R2":
-                                                pieces_to_jump_location.append(R2.location)
-                                                B4.jump_enemy(R2, where_to_move)
-                                          elif piece == "R3":
-                                                pieces_to_jump_location.append(R3.location)
-                                                B4.jump_enemy(R3, where_to_move)
-                                          elif piece == "R4":
-                                                pieces_to_jump_location.append(R4.location)
-                                                B4.jump_enemy(R4, where_to_move)
-                                          elif piece == "R5":
-                                                pieces_to_jump_location.append(R5.location)
-                                                B4.jump_enemy(R5, where_to_move)
-                                          elif piece == "R6":
-                                                pieces_to_jump_location.append(R6.location)
-                                                B4.jump_enemy(R6, where_to_move)
-                                          elif piece == "R7":
-                                                pieces_to_jump_location.append(R7.location)
-                                                B4.jump_enemy(R7, where_to_move)
-                                          elif piece == "R8":
-                                                pieces_to_jump_location.append(R8.location)
-                                                B4.jump_enemy(R8, where_to_move)
-                                          elif piece == "R9":
-                                                pieces_to_jump_location.append(R9.location)
-                                                B4.jump_enemy(R9, where_to_move)
-                                          elif piece == "R10":
-                                                pieces_to_jump_location.append(R10.location)
-                                                B4.jump_enemy(R10, where_to_move)
-                                          elif piece == "R11":
-                                                pieces_to_jump_location.append(R11.location)
-                                                B4.jump_enemy(R11, where_to_move)
-                                          else:
-                                                pieces_to_jump_location.append(R12.location)
-                                                B4.jump_enemy(R12, where_to_move)
-                                    elif piece_to_move == "B5":
-                                          if piece == "R1":
-                                                pieces_to_jump_location.append(R1.location)
-                                                B5.jump_enemy(R1, where_to_move)
-                                          elif piece == "R2":
-                                                pieces_to_jump_location.append(R2.location)
-                                                B5.jump_enemy(R2, where_to_move)
-                                          elif piece == "R3":
-                                                pieces_to_jump_location.append(R3.location)
-                                                B5.jump_enemy(R3, where_to_move)
-                                          elif piece == "R4":
-                                                pieces_to_jump_location.append(R4.location)
-                                                B5.jump_enemy(R4, where_to_move)
-                                          elif piece == "R5":
-                                                pieces_to_jump_location.append(R5.location)
-                                                B5.jump_enemy(R5, where_to_move)
-                                          elif piece == "R6":
-                                                pieces_to_jump_location.append(R6.location)
-                                                B5.jump_enemy(R6, where_to_move)
-                                          elif piece == "R7":
-                                                pieces_to_jump_location.append(R7.location)
-                                                B5.jump_enemy(R7, where_to_move)
-                                          elif piece == "R8":
-                                                pieces_to_jump_location.append(R8.location)
-                                                B5.jump_enemy(R8, where_to_move)
-                                          elif piece == "R9":
-                                                pieces_to_jump_location.append(R9.location)
-                                                B5.jump_enemy(R9, where_to_move)
-                                          elif piece == "R10":
-                                                pieces_to_jump_location.append(R10.location)
-                                                B5.jump_enemy(R10, where_to_move)
-                                          elif piece == "R11":
-                                                pieces_to_jump_location.append(R11.location)
-                                                B5.jump_enemy(R11, where_to_move)
-                                          else:
-                                                pieces_to_jump_location.append(R12.location)
-                                                B5.jump_enemy(R12, where_to_move)
-                                    elif piece_to_move == "B6":
-                                          if piece == "R1":
-                                                pieces_to_jump_location.append(R1.location)
-                                                B6.jump_enemy(R1, where_to_move)
-                                          elif piece == "R2":
-                                                pieces_to_jump_location.append(R2.location)
-                                                B6.jump_enemy(R2, where_to_move)
-                                          elif piece == "R3":
-                                                pieces_to_jump_location.append(R3.location)
-                                                B6.jump_enemy(R3, where_to_move)
-                                          elif piece == "R4":
-                                                pieces_to_jump_location.append(R4.location)
-                                                B6.jump_enemy(R4, where_to_move)
-                                          elif piece == "R5":
-                                                pieces_to_jump_location.append(R5.location)
-                                                B6.jump_enemy(R5, where_to_move)
-                                          elif piece == "R6":
-                                                pieces_to_jump_location.append(R6.location)
-                                                B6.jump_enemy(R6, where_to_move)
-                                          elif piece == "R7":
-                                                pieces_to_jump_location.append(R7.location)
-                                                B6.jump_enemy(R7, where_to_move)
-                                          elif piece == "R8":
-                                                pieces_to_jump_location.append(R8.location)
-                                                B6.jump_enemy(R8, where_to_move)
-                                          elif piece == "R9":
-                                                pieces_to_jump_location.append(R9.location)
-                                                B6.jump_enemy(R9, where_to_move)
-                                          elif piece == "R10":
-                                                pieces_to_jump_location.append(R10.location)
-                                                B6.jump_enemy(R10, where_to_move)
-                                          elif piece == "R11":
-                                                pieces_to_jump_location.append(R11.location)
-                                                B6.jump_enemy(R11, where_to_move)
-                                          else:
-                                                pieces_to_jump_location.append(R12.location)
-                                                B6.jump_enemy(R12, where_to_move)
-                                    elif piece_to_move == "B7":
-                                          if piece == "R1":
-                                                pieces_to_jump_location.append(R1.location)
-                                                B7.jump_enemy(R1, where_to_move)
-                                          elif piece == "R2":
-                                                pieces_to_jump_location.append(R2.location)
-                                                B7.jump_enemy(R2, where_to_move)
-                                          elif piece == "R3":
-                                                pieces_to_jump_location.append(R3.location)
-                                                B7.jump_enemy(R3, where_to_move)
-                                          elif piece == "R4":
-                                                pieces_to_jump_location.append(R4.location)
-                                                B7.jump_enemy(R4, where_to_move)
-                                          elif piece == "R5":
-                                                pieces_to_jump_location.append(R5.location)
-                                                B7.jump_enemy(R5, where_to_move)
-                                          elif piece == "R6":
-                                                pieces_to_jump_location.append(R6.location)
-                                                B7.jump_enemy(R6, where_to_move)
-                                          elif piece == "R7":
-                                                pieces_to_jump_location.append(R7.location)
-                                                B7.jump_enemy(R7, where_to_move)
-                                          elif piece == "R8":
-                                                pieces_to_jump_location.append(R8.location)
-                                                B7.jump_enemy(R8, where_to_move)
-                                          elif piece == "R9":
-                                                pieces_to_jump_location.append(R9.location)
-                                                B7.jump_enemy(R9, where_to_move)
-                                          elif piece == "R10":
-                                                pieces_to_jump_location.append(R10.location)
-                                                B7.jump_enemy(R10, where_to_move)
-                                          elif piece == "R11":
-                                                pieces_to_jump_location.append(R11.location)
-                                                B7.jump_enemy(R11, where_to_move)
-                                          else:
-                                                pieces_to_jump_location.append(R12.location)
-                                                B7.jump_enemy(R12, where_to_move)
-                                    elif piece_to_move == "B8":
-                                          if piece == "R1":
-                                                pieces_to_jump_location.append(R1.location)
-                                                B8.jump_enemy(R1, where_to_move)
-                                          elif piece == "R2":
-                                                pieces_to_jump_location.append(R2.location)
-                                                B8.jump_enemy(R2, where_to_move)
-                                          elif piece == "R3":
-                                                pieces_to_jump_location.append(R3.location)
-                                                B8.jump_enemy(R3, where_to_move)
-                                          elif piece == "R4":
-                                                pieces_to_jump_location.append(R4.location)
-                                                B8.jump_enemy(R4, where_to_move)
-                                          elif piece == "R5":
-                                                pieces_to_jump_location.append(R5.location)
-                                                B8.jump_enemy(R5, where_to_move)
-                                          elif piece == "R6":
-                                                pieces_to_jump_location.append(R6.location)
-                                                B8.jump_enemy(R6, where_to_move)
-                                          elif piece == "R7":
-                                                pieces_to_jump_location.append(R7.location)
-                                                B8.jump_enemy(R7, where_to_move)
-                                          elif piece == "R8":
-                                                pieces_to_jump_location.append(R8.location)
-                                                B8.jump_enemy(R8, where_to_move)
-                                          elif piece == "R9":
-                                                pieces_to_jump_location.append(R9.location)
-                                                B8.jump_enemy(R9, where_to_move)
-                                          elif piece == "R10":
-                                                pieces_to_jump_location.append(R10.location)
-                                                B8.jump_enemy(R10, where_to_move)
-                                          elif piece == "R11":
-                                                pieces_to_jump_location.append(R11.location)
-                                                B8.jump_enemy(R11, where_to_move)
-                                          else:
-                                                pieces_to_jump_location.append(R12.location)
-                                                B8.jump_enemy(R12, where_to_move)
-                                    elif piece_to_move == "B9":
-                                          if piece == "R1":
-                                                pieces_to_jump_location.append(R1.location)
-                                                B9.jump_enemy(R1, where_to_move)
-                                          elif piece == "R2":
-                                                pieces_to_jump_location.append(R2.location)
-                                                B9.jump_enemy(R2, where_to_move)
-                                          elif piece == "R3":
-                                                pieces_to_jump_location.append(R3.location)
-                                                B9.jump_enemy(R3, where_to_move)
-                                          elif piece == "R4":
-                                                pieces_to_jump_location.append(R4.location)
-                                                B9.jump_enemy(R4, where_to_move)
-                                          elif piece == "R5":
-                                                pieces_to_jump_location.append(R5.location)
-                                                B9.jump_enemy(R5, where_to_move)
-                                          elif piece == "R6":
-                                                pieces_to_jump_location.append(R6.location)
-                                                B9.jump_enemy(R6, where_to_move)
-                                          elif piece == "R7":
-                                                pieces_to_jump_location.append(R7.location)
-                                                B9.jump_enemy(R7, where_to_move)
-                                          elif piece == "R8":
-                                                pieces_to_jump_location.append(R8.location)
-                                                B9.jump_enemy(R8, where_to_move)
-                                          elif piece == "R9":
-                                                pieces_to_jump_location.append(R9.location)
-                                                B9.jump_enemy(R9, where_to_move)
-                                          elif piece == "R10":
-                                                pieces_to_jump_location.append(R10.location)
-                                                B9.jump_enemy(R10, where_to_move)
-                                          elif piece == "R11":
-                                                pieces_to_jump_location.append(R11.location)
-                                                B9.jump_enemy(R11, where_to_move)
-                                          else:
-                                                pieces_to_jump_location.append(R12.location)
-                                                B9.jump_enemy(R12, where_to_move)
-                                    elif piece_to_move == "B10":
-                                          if piece == "R1":
-                                                pieces_to_jump_location.append(R1.location)
-                                                B10.jump_enemy(R1, where_to_move)
-                                          elif piece == "R2":
-                                                pieces_to_jump_location.append(R2.location)
-                                                B10.jump_enemy(R2, where_to_move)
-                                          elif piece == "R3":
-                                                pieces_to_jump_location.append(R3.location)
-                                                B10.jump_enemy(R3, where_to_move)
-                                          elif piece == "R4":
-                                                pieces_to_jump_location.append(R4.location)
-                                                B10.jump_enemy(R4, where_to_move)
-                                          elif piece == "R5":
-                                                pieces_to_jump_location.append(R5.location)
-                                                B10.jump_enemy(R5, where_to_move)
-                                          elif piece == "R6":
-                                                pieces_to_jump_location.append(R6.location)
-                                                B10.jump_enemy(R6, where_to_move)
-                                          elif piece == "R7":
-                                                pieces_to_jump_location.append(R7.location)
-                                                B10.jump_enemy(R7, where_to_move)
-                                          elif piece == "R8":
-                                                pieces_to_jump_location.append(R8.location)
-                                                B10.jump_enemy(R8, where_to_move)
-                                          elif piece == "R9":
-                                                pieces_to_jump_location.append(R9.location)
-                                                B10.jump_enemy(R9, where_to_move)
-                                          elif piece == "R10":
-                                                pieces_to_jump_location.append(R10.location)
-                                                B10.jump_enemy(R10, where_to_move)
-                                          elif piece == "R11":
-                                                pieces_to_jump_location.append(R11.location)
-                                                B10.jump_enemy(R11, where_to_move)
-                                          else:
-                                                pieces_to_jump_location.append(R12.location)
-                                                B10.jump_enemy(R12, where_to_move)
-                                    elif piece_to_move == "B11":
-                                          if piece == "R1":
-                                                pieces_to_jump_location.append(R1.location)
-                                                B11.jump_enemy(R1, where_to_move)
-                                          elif piece == "R2":
-                                                pieces_to_jump_location.append(R2.location)
-                                                B11.jump_enemy(R2, where_to_move)
-                                          elif piece == "R3":
-                                                pieces_to_jump_location.append(R3.location)
-                                                B11.jump_enemy(R3, where_to_move)
-                                          elif piece == "R4":
-                                                pieces_to_jump_location.append(R4.location)
-                                                B11.jump_enemy(R4, where_to_move)
-                                          elif piece == "R5":
-                                                pieces_to_jump_location.append(R5.location)
-                                                B11.jump_enemy(R5, where_to_move)
-                                          elif piece == "R6":
-                                                pieces_to_jump_location.append(R6.location)
-                                                B11.jump_enemy(R6, where_to_move)
-                                          elif piece == "R7":
-                                                pieces_to_jump_location.append(R7.location)
-                                                B11.jump_enemy(R7, where_to_move)
-                                          elif piece == "R8":
-                                                pieces_to_jump_location.append(R8.location)
-                                                B11.jump_enemy(R8, where_to_move)
-                                          elif piece == "R9":
-                                                pieces_to_jump_location.append(R9.location)
-                                                B11.jump_enemy(R9, where_to_move)
-                                          elif piece == "R10":
-                                                pieces_to_jump_location.append(R10.location)
-                                                B11.jump_enemy(R10, where_to_move)
-                                          elif piece == "R11":
-                                                pieces_to_jump_location.append(R11.location)
-                                                B11.jump_enemy(R11, where_to_move)
-                                          else:
-                                                pieces_to_jump_location.append(R12.location)
-                                                B11.jump_enemy(R12, where_to_move)
-                                    else:
-                                          if piece == "R1":
-                                                pieces_to_jump_location.append(R1.location)
-                                                B12.jump_enemy(R1, where_to_move)
-                                          elif piece == "R2":
-                                                pieces_to_jump_location.append(R2.location)
-                                                B12.jump_enemy(R2, where_to_move)
-                                          elif piece == "R3":
-                                                pieces_to_jump_location.append(R3.location)
-                                                B12.jump_enemy(R3, where_to_move)
-                                          elif piece == "R4":
-                                                pieces_to_jump_location.append(R4.location)
-                                                B12.jump_enemy(R4, where_to_move)
-                                          elif piece == "R5":
-                                                pieces_to_jump_location.append(R5.location)
-                                                B12.jump_enemy(R5, where_to_move)
-                                          elif piece == "R6":
-                                                pieces_to_jump_location.append(R6.location)
-                                                B12.jump_enemy(R6, where_to_move)
-                                          elif piece == "R7":
-                                                pieces_to_jump_location.append(R7.location)
-                                                B12.jump_enemy(R7, where_to_move)
-                                          elif piece == "R8":
-                                                pieces_to_jump_location.append(R8.location)
-                                                B12.jump_enemy(R8, where_to_move)
-                                          elif piece == "R9":
-                                                pieces_to_jump_location.append(R9.location)
-                                                B12.jump_enemy(R9, where_to_move)
-                                          elif piece == "R10":
-                                                pieces_to_jump_location.append(R10.location)
-                                                B12.jump_enemy(R10, where_to_move)
-                                          elif piece == "R11":
-                                                pieces_to_jump_location.append(R11.location)
-                                                B12.jump_enemy(R11, where_to_move)
-                                          else:
-                                                pieces_to_jump_location.append(R12.location)
-                                                B12.jump_enemy(R12, where_to_move)
+                              for piece in pieces_to_jump:
+                                    piece_object_enemy = identify_piece(piece)
+                                    pieces_to_jump_location.append(piece_object_enemy.location)
+                                    piece_object.jump_enemy(piece_object_enemy, where_to_move)
+
                         elif movement_direction == "down" or (movement_direction == "up" and king_status):
-                              if piece_to_move == "B1":
-                                    B1.move_piece(where_to_move)
-                              elif piece_to_move == "B2":
-                                    B2.move_piece(where_to_move)
-                              elif piece_to_move == "B3":
-                                    B3.move_piece(where_to_move)
-                              elif piece_to_move == "B4":
-                                    B4.move_piece(where_to_move)
-                              elif piece_to_move == "B5":
-                                    B5.move_piece(where_to_move)
-                              elif piece_to_move == "B6":
-                                    B6.move_piece(where_to_move)
-                              elif piece_to_move == "B7":
-                                    B7.move_piece(where_to_move)
-                              elif piece_to_move == "B8":
-                                    B8.move_piece(where_to_move)
-                              elif piece_to_move == "B9":
-                                    B9.move_piece(where_to_move)
-                              elif piece_to_move == "B10":
-                                    B10.move_piece(where_to_move)
-                              elif piece_to_move == "B11":
-                                    B11.move_piece(where_to_move)
-                              else:
-                                    B12.move_piece(where_to_move)
+                              piece_object.move_piece(where_to_move)
+
                         else:
                               print("Something went wrong. Please try again.")
                         
+                        #check if piece should become a king, or is already a king
                         if where_to_move[0] == 8:
                               print("Congratulations! You have gotten your piece to the far side of the board. It is now a king and can move in any direction.")
-                              if piece_to_move == "B1":
-                                    B1.king = True
-                              elif piece_to_move == "B2":
-                                    B2.king = True
-                              elif piece_to_move == "B3":
-                                    B3.king = True
-                              elif piece_to_move == "B4":
-                                    B4.king = True
-                              elif piece_to_move == "B5":
-                                    B5.king = True
-                              elif piece_to_move == "B6":
-                                    B6.king = True
-                              elif piece_to_move == "B7":
-                                    B7.king = True
-                              elif piece_to_move == "B8":
-                                    B8.king = True
-                              elif piece_to_move == "B9":
-                                    B9.king = True
-                              elif piece_to_move == "B10":
-                                    B10.king = True
-                              elif piece_to_move == "B11":
-                                    B11.king = True
-                              else:
-                                    B12.king = True
+                              piece_object.king = True
                               is_king = True
                         elif king_status:
                               is_king = True
                         else:
-                              is_king = False
-
-
+                              is_king = False                        
+                        
+                        #redraw the board with new position(s)
                         if is_jump == "y":
                               update_board(piece_to_move, current_location, where_to_move, is_king, pieces_to_jump_location)
                         else:
