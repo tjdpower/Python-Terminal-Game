@@ -217,9 +217,13 @@ while (Checkers_Piece.black_piece_count != 0 and Checkers_Piece.white_piece_coun
                   #need to identify if checker piece being moved is a king
                   king_status = piece_object.king
                   
-                  #movement direction
-                  if abs(int(where_to_move[1]) - int(current_location[1])) != 1 and is_jump == "n":
+                  #movement check and direction assignment
+                  horizontal_change = abs(int(where_to_move[1]) - int(current_location[1]))
+                  vertical_change = abs(int(where_to_move[0]) - int(current_location[0]))
+                  if horizontal_change != vertical_change:
                         print("Sorry, that is not a valid move. Please try again.")
+                  elif horizontal_change != 1 and is_jump == "n":
+                        print("You can only move one space at a time unless you are jumping another piece!")
                   else:
                         if (int(where_to_move[0]) - int(current_location[0]) > 0):
                               movement_direction = "down"
@@ -290,9 +294,13 @@ while (Checkers_Piece.black_piece_count != 0 and Checkers_Piece.white_piece_coun
                   king_status = piece_object.king
                   
                   
-                  #movement direction
-                  if abs(int(where_to_move[1]) - int(current_location[1])) != 1 and is_jump == "n":
+                  #movement check and direction assignment
+                  horizontal_change = abs(int(where_to_move[1]) - int(current_location[1]))
+                  vertical_change = abs(int(where_to_move[0]) - int(current_location[0]))
+                  if horizontal_change != vertical_change:
                         print("Sorry, that is not a valid move. Please try again.")
+                  elif horizontal_change != 1 and is_jump == "n":
+                        print("You can only move one space at a time unless you are jumping another piece!")
                   else:
                         if (int(where_to_move[0]) - int(current_location[0]) > 0):
                               movement_direction = "down"
